@@ -2,8 +2,11 @@
 layout: default
 ---
 
-<div class="row">
-  <div class="{% if page.sidebar == false %}span12{% else %}span8{% endif %}">
+<div class="row-fluid">
+  {% if site.sidebar_posn == "left" %}
+    {% include sidebar.html %}
+  {% endif %}
+  <div class="{% if page.sidebar == false %}span12{% else %}span{{ 12 - site.sidebar_width }}{% endif %}">
     {% if page.title %}
       <div class="page-header">
         <h1>{% if site.titlecase %}{{ page.title | titlecase }}{% else %}{{ page.title }}{% endif %}</h1>
@@ -33,5 +36,7 @@ layout: default
       </section>
     {% endif %}
   </div>
-  {% include sidebar.html %}
+  {% if site.sidebar_posn != "left" %}
+    {% include sidebar.html %}
+  {% endif %}
 </div>
